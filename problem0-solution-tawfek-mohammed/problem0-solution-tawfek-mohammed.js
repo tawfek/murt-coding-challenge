@@ -28,7 +28,7 @@ let whereIsMyFood = (fridge, item) => {
     var itemIndex = -1;
     var FridgeCap = fridge.length;
     while (FridgeCap--) {
-        if (fridge[FridgeCap] == item) {
+        if (fridge[FridgeCap].toLowerCase() == item.toLowerCase()) {
             itemIndex = FridgeCap;
             break;
         }
@@ -106,7 +106,7 @@ try {
     }
 
     // get the first fridge food from data
-    let firstFridge = data[0]['fridge'];
+    let firstFridge = data['fridge'];
 
     // find the item in the fridge
     let findItem = whereIsMyFood(firstFridge, itemNameArg);
@@ -134,7 +134,7 @@ try {
   }else{
     response = {
       'status': 'error',
-      'error_type': error.ERROR_TYPE,
+      'error_name': error.ERROR_TYPE,
       'message': error.message,
       'RETURNED_VALUE': error.RETURNED_VALUE
   };

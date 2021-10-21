@@ -1,5 +1,4 @@
-[
-    {
+{
         "fridge": [
             "banana",
             "apple",
@@ -8,24 +7,9 @@
             "oranges",
             "raspberries",
             "blueberries",
-            "kiwifruit"
-        ],
-        "FoodToSeach": "apple"
-    },
-    {
-        "fridge": [
-            "banana",
-            "apple"
-        ],
-        "FoodToSeach": "kiwifruit"
-    },
-    {
-        "fridge": [
-            "oranges",
-            "raspberries",
-            "blueberries",
-            "kiwifruit"
-        ],
-        "FoodToSeach": "عربي"
-    }
-]
+            "kiwifruit",
+            "onion",
+            "lettuce",
+            "tomato"
+        ]
+}
