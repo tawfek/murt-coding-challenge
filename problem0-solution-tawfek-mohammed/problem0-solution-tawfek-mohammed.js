@@ -5,6 +5,14 @@ var fs = require('fs');
  *  [-i] [--item] : the item name to search in the fridge (required)
  * [-f] [--file] : the file name to search in (optional , default inputs.json)
  * the file MUST HAVE at least one array that contains fridge object
+ * 
+ * examples : 
+ *  node [filename].js --item banana
+ *  node [filename].js -i banana 
+ * 
+ * node [filename].js -f inputs.json -item apple
+ * node [filename].js -file inputs.json -i apple
+ * 
  */
 
 /**
