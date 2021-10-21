@@ -48,7 +48,7 @@ class ErrorException extends Error {
 class SuccessException extends Error {
   constructor(args, item ,i) {
       super(args);
-      this.STATUS = "SUCCESS"
+      this.SUCCESS = "SUCCESS"
       this.ITEM_NAME = item ;
       this.ITEM_INDEX =  i ;
   }
@@ -125,7 +125,7 @@ try {
 
 } catch (error) {
   let response  ;
-  if(error.STATUS){
+  if(error.SUCCESS){
     response = {
       'status': 'success' ,
       'item_name':error.ITEM_NAME ,
