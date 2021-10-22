@@ -4,7 +4,7 @@ var fs = require('fs');
  *  options :
  *  [-i] [--item] : the item name to search in the fridge (required)
  * [-f] [--file] : the file name to search in (optional , default inputs.json)
- * the file MUST HAVE at least one array that contains fridge object
+ * the file MUST HAVE fridge object
  * 
  * examples : 
  *  node [filename].js --item banana
@@ -63,6 +63,8 @@ let ReadInputFile = (path = 'input.json') => {
     }
 }
 
+
+// get arguments from command line - and skip first 2 item
 var arguments = process
     .argv
     .slice(2);
