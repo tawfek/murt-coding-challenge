@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <title>My Fridge</title>
+    </head>
+  <body>
+    <h2>Fridge Items</h2>
+    <table id="table">
+      <thead>
+        <td>
+          <b>Item</b>
+        </td>
+        <td>
+          <b>Count</b>
+        </td>
+        <td>
+          <b>Remove</b>
+        </td>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cucumber</td>
+          <td>3</td>
+          <td><button onClick="remove(event)">X</button></td>
+        </tr>
+        <tr>
+          <td>Lettuce</td>
+          <td>5</td>
+          <td><button onClick="remove(event)">X</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <input id="newItem" type="text">
+    <button onClick="addNewItem()">Add</button>
+    <p id="error"></p>
+  </body>
+  <script>
+    var tableRef = document.getElementById('table').getElementsByTagName('tbody')[0];
+
+    var fridge = {
+        "tomato": 2,
+        "onion": 2,
+        "apple": 3,
+        "banana": 5
+      }
+    function addItem (item,count){
+        var tableRow = tableRef.insertRow(tableRef.rows.length)
+        var newItem = tableRow.insertCell(0) 
+        var itemCount = tableRow.insertCell(1) 
+        var removeButton = tableRow.insertCell(2)
+        newItem.appendChild(document.createTextNode(item))
+        itemCount.appendChild(document.createTextNode(count)) 
+        removeButton.innerHTML=('<button onClick="remove(event)">X</button>')
+    } 
+    
+    for(item in fridge){
+        addItem(item,fridge[item])
+    }
+    
+    function remove(event) {
+      var selectRow = ((event.target.parentNode).parentNode)
+      selectRow.style.display = 'none' 
+    }
+    function errorHandler(add,error=''){
+        let errorInput = document.getElementById('error') 
+        if(add){
+            errorInput.innerHTML = error
+        }else{
+            errorInput.innerHTML = ''
+        }
+    }
+    
+    function addNewItem(){
+    
+        // get the input value 
+        let inputValue = document.getElementById('newItem').value ;
+    
+        inputValue = (inputValue.split(' '))
+        // check if input is not empty
+        if(inputValue.length == 0 || inputValue.length < 2){
+            // add new error
+            errorHandler(true,"Please type the item name and count , example : apple 4")
+        }else{
+            // reset the errors
+            errorHandler(false)
+            if(isNaN(inputValue[1]) || inputValue[1]=='' ){
+                errorHandler(true,"The count should be a number")
+            }else{
+                if(inputValue[0] == ''){
+                    errorHandler(true,'Please enter the item name')
+                }else{
+                    errorHandler(false)
+                    let itemName = inputValue[0]
+                    let itemCount = inputValue[1]
+                    addItem(itemName,itemCount)
+                }
+            }
+    
+        }
+    
+    }
+  </script>
+  <style>
+    td {
+      padding-right: 50px;
+    }
+  </style>
+</html>

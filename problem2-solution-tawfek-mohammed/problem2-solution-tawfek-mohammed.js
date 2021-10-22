@@ -6,7 +6,7 @@ let fs = require('fs')
  * options :
  * [-i][--ingredients] : select the ingredients , we have 5 ingredients , and we can list them (optional , default : 1)
  * [-f][--file] : select the file that contains the fridge data (optional , default : inputs.json)
- * [-l][--list] : list all ingredients with ingredients number and items (optional)
+ * [-l][--list] : list all ingredients with ingredients number and items
  * 
  *  note : if the ingredients number not found , will automaticly set to ingredients number 1
  *  note : you can edit the data from inputs.json file
@@ -35,12 +35,12 @@ let fs = require('fs')
  * @param {Array.<String>} ingredients 
  * @returns {bool} checkQuantity
  */
-let validateRecipeWithQuantity = (fridge, ingredients) => {
+let validateRecipeWithQuantity = (fridge, ingredient) => {
 
     // check if all ingredients items are in fridge or not 
     let checkQuantity = true
 
-    for (var item in ingredients) {
+    for (var item in ingredient) {
         // check item if exist in fridge else return false
         if (!fridge[item]) {
             checkQuantity = false
@@ -49,7 +49,7 @@ let validateRecipeWithQuantity = (fridge, ingredients) => {
         } else {
             // the item found in fridge 
             let itemQuantityInFridge = fridge[item];
-            let itemQuantityInIngredients = ingredients[item]
+            let itemQuantityInIngredients = ingredient[item]
             // now checking for Quantity
             if (itemQuantityInIngredients > itemQuantityInFridge) {
                 checkQuantity = false
