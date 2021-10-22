@@ -7,6 +7,8 @@ var fs = require('fs');
  * [-f][--file] : select the file that contains the fridge data (optional : default : inputs.json)
  * [-l][--list] : list all ingredients with ingredients number and items (optional)
  * 
+ *  note : if the ingredients number not found , will automaticly set to ingredients number 1
+ * 
  * commands examples : 
  *  node [filename].js 
  * 
@@ -30,24 +32,30 @@ var fs = require('fs');
  * @returns {bool} ValidRecipe
  */
 
- ingredients = [['tomato','apple', 'onion'], ['tomato','banana', 'onion'],['onion','tomato'], ['banana','32'],['apple']]
+ingredients = [
+    ['tomato', 'apple', 'onion'],
+    ['tomato', 'banana', 'onion'],
+    ['onion', 'tomato'],
+    ['banana', '32'],
+    ['apple']
+]
 
 
-function validateRecipe(fridge,ingredients){
+function validateRecipe(fridge, ingredients) {
     // declare ValidRecipe as true 
-    var ValidRecipe = true ;
+    var ValidRecipe = true;
     // for each item in ingredients 
-    ingredients.forEach((recipeItem,i) => {
+    ingredients.forEach((recipeItem, i) => {
         // Check if recipe item exists in fridge 
         validateRecipeC = fridge.indexOf(recipeItem.toLowerCase());
-        if(validateRecipeC == -1){
+        if (validateRecipeC == -1) {
 
             // if not exist set ValidRecipe to false and break the loop
-            ValidRecipe = false 
-            return 
+            ValidRecipe = false
+            return
         }
     });
-    return ValidRecipe 
+    return ValidRecipe
 }
 
 
@@ -67,109 +75,109 @@ class ErrorException extends Error {
 }
 
 class SuccessException extends Error {
-  constructor(args,response) {
-      super(args);
-      this.SUCCESS = "SUCCESS"
-      this.VALID_RECIPE = (response)?"RECIPE FOUND IN THE FRIDGE":"ingredients are not found in the fridge"
-      this.RETURNED_VALUE = response
-  }
+    constructor(args, response) {
+        super(args);
+        this.SUCCESS = "SUCCESS"
+        this.VALID_RECIPE = (response) ? "RECIPE FOUND IN THE FRIDGE" : "ingredients are not found in the fridge"
+        this.RETURNED_VALUE = response
+    }
 }
 var arguments = process.argv.slice(2);
 try {
 
     // Handle file name arguments search for (-f,--file) arg
-    var fileArg = arguments.indexOf('--file') == -1
-        ? arguments.indexOf('-f')
-        : arguments.indexOf('--file');;
+    var fileArg = arguments.indexOf('--file') == -1 ?
+        arguments.indexOf('-f') :
+        arguments.indexOf('--file');;
 
     // get the file name
-    var fileName = (fileArg !== -1)
-        ? arguments[fileArg + 1]
-        : 'inputs.json';
+    var fileName = (fileArg !== -1) ?
+        arguments[fileArg + 1] :
+        'inputs.json';
 
     // throw error exception when call file argument and not typed the file name
     if (!fileName) {
         throw new ErrorException('NO_FILE_SELECTED', 'FILE_ERROR')
     }
-        
-
-        // display the list of ingredients
-        var listArg = arguments.indexOf('--list') == -1
-        ? arguments.indexOf('-l')
-        : arguments.indexOf('--list');;
 
 
+    // display the list of ingredients
+    var listArg = arguments.indexOf('--list') == -1 ?
+        arguments.indexOf('-l') :
+        arguments.indexOf('--list');;
 
-        // Handle ing
-        var ingredientsArg = arguments.indexOf('--ingredients') == -1
-        ? arguments.indexOf('-i')
-        : arguments.indexOf('--ingredients');;
+
+
+    // Handle ing
+    var ingredientsArg = arguments.indexOf('--ingredients') == -1 ?
+        arguments.indexOf('-i') :
+        arguments.indexOf('--ingredients');;
 
     // get the file name
-    var ingredientsDataArg = (ingredientsArg !== -1)
-        ? arguments[ingredientsArg + 1]
-        : ingredients;
+    var ingredientsDataArg = (ingredientsArg !== -1) ?
+        arguments[ingredientsArg + 1] :
+        ingredients;
 
-        // check is list command called
-      if(listArg ==-1){
+    // check is list command called
+    if (listArg == -1) {
 
-    var selectIngredients = (ingredientsDataArg<=5 && ingredientsDataArg>0)?ingredientsDataArg:1 ;
+        var selectIngredients = (ingredientsDataArg <= 5 && ingredientsDataArg > 0) ? ingredientsDataArg : 1;
 
-    if(!selectIngredients){
-     
+        if (!selectIngredients) {
+
             throw new ErrorException('ingredients_not_found : there are 5 ingredients , choose one ingredients at least  ', 'ingredients_error');
-        
-    }
-    // Read file by file name | path
-    var data = ReadInputFile('inputs.json');
 
-    // throw error if file not found or unable to read
-    if (!data) {
-        throw new ErrorException('FILE_NOT_FOUND_OR_INVALID', 'FILE_ERROR');
-    }
-    
-    // get the first fridge food from data
-    let firstFridge = data['fridge'];
-    if((validateRecipe(firstFridge,ingredients[selectIngredients]))){
-        throw new SuccessException('success',true)
-    }else{
-        throw new SuccessException('success',false)
+        }
+        // Read file by file name | path
+        var data = ReadInputFile('inputs.json');
 
-    }
+        // throw error if file not found or unable to read
+        if (!data) {
+            throw new ErrorException('FILE_NOT_FOUND_OR_INVALID', 'FILE_ERROR');
+        }
 
-}else{
+        // get the first fridge food from data
+        let firstFridge = data['fridge'];
+        if ((validateRecipe(firstFridge, ingredients[selectIngredients]))) {
+            throw new SuccessException('success', true)
+        } else {
+            throw new SuccessException('success', false)
+
+        }
+
+    } else {
 
 
-    // display ingredients lists
-    ingredients.forEach((item,i)=>{
-        let listItems = '' 
-        item.forEach((itemList,i)=>{
-            // check its not the last item in the list 
-            if((item.length-1) !=i){
-                itemList+=','
-            }
-            listItems+= itemList
+        // display ingredients lists
+        ingredients.forEach((item, i) => {
+            let listItems = ''
+            item.forEach((itemList, i) => {
+                // check its not the last item in the list 
+                if ((item.length - 1) != i) {
+                    itemList += ','
+                }
+                listItems += itemList
+            })
+            console.log(i, '-', listItems)
         })
-        console.log(i,'-',listItems)
-    })
 
-}
+    }
 
-}catch(e){
-    if(e.SUCCESS){
+} catch (e) {
+    if (e.SUCCESS) {
         response = {
-            'status': 'success' ,
-            'message':e.VALID_RECIPE ,
-            'RETURNED_VALUE' : e.RETURNED_VALUE
-          }
-    }else{
+            'status': 'success',
+            'message': e.VALID_RECIPE,
+            'RETURNED_VALUE': e.RETURNED_VALUE
+        }
+    } else {
         response = {
             'status': 'error',
             'error_name': e.ERROR_TYPE,
             'message': e.message,
         }
 
-        response = e 
+        response = e
     }
 
     console.log(response)
