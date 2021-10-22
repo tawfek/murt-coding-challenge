@@ -10,5 +10,12 @@
             "onion",
             "lettuce",
             "tomato"
+        ],
+       "ingredients": [
+            ["tomato", "apple", "onion"],
+            ["tomato", "banana", "onion"],
+            ["onion", "tomato"],
+            ["banana", "32"],
+            ["apple"]
         ]
 }

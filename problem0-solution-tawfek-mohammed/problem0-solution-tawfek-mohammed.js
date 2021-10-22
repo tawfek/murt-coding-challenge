@@ -36,22 +36,24 @@ let whereIsMyFood = (fridge, item) => {
     return itemIndex;
 }
 
+
+
 class ErrorException extends Error {
-    constructor(args, type, val = '',item) {
+    constructor(args, type, val = '', item) {
         super(args);
         this.ERROR_TYPE = type
-        this.ITEM_NAME = item 
+        this.ITEM_NAME = item
         this.RETURNED_VALUE = val
     }
 }
 
 class SuccessException extends Error {
-  constructor(args, item ,i) {
-      super(args);
-      this.SUCCESS = "SUCCESS"
-      this.ITEM_NAME = item ;
-      this.ITEM_INDEX =  i ;
-  }
+    constructor(args, item, i) {
+        super(args);
+        this.SUCCESS = "SUCCESS"
+        this.ITEM_NAME = item;
+        this.ITEM_INDEX = i;
+    }
 }
 
 let ReadInputFile = (path = 'input.json') => {
@@ -72,14 +74,14 @@ var arguments = process
 try {
 
     // Handle file name arguments search for (-f,--file) arg
-    var fileArg = arguments.indexOf('--file') == -1
-        ? arguments.indexOf('-f')
-        : arguments.indexOf('--file');;
+    var fileArg = arguments.indexOf('--file') == -1 ?
+        arguments.indexOf('-f') :
+        arguments.indexOf('--file');;
 
     // get the file name
-    var fileName = (fileArg !== -1)
-        ? arguments[fileArg + 1]
-        : 'inputs.json';
+    var fileName = (fileArg !== -1) ?
+        arguments[fileArg + 1] :
+        'inputs.json';
 
     // throw error exception when call file argument and not typed the file name
     if (!fileName) {
@@ -87,14 +89,14 @@ try {
     }
 
     // Handle item to search arguments search for (-i,--item) arg
-    var itemArg = arguments.indexOf('--item') == -1
-        ? arguments.indexOf('-i')
-        : arguments.indexOf('--item');
+    var itemArg = arguments.indexOf('--item') == -1 ?
+        arguments.indexOf('-i') :
+        arguments.indexOf('--item');
 
     // get item name to search for
-    var itemNameArg = (itemArg != -1)
-        ? arguments[itemArg + 1]
-        : false;
+    var itemNameArg = (itemArg != -1) ?
+        arguments[itemArg + 1] :
+        false;
     if (!itemNameArg) {
         throw new ErrorException('NO_ITEM_SELECTED', 'ITEM_ERROR')
     }
@@ -120,27 +122,27 @@ try {
 
         // the item found in the fridge return success message with item name and his
         // place in the fridge [index]
-        throw new SuccessException('ITEM_FOUND',itemNameArg,findItem)
-        
+        throw new SuccessException('ITEM_FOUND', itemNameArg, findItem)
+
 
     }
 
 } catch (error) {
-  let response  ;
-  if(error.SUCCESS){
-    response = {
-      'status': 'success' ,
-      'item_name':error.ITEM_NAME ,
-      'index' : error.ITEM_INDEX
+    let response;
+    if (error.SUCCESS) {
+        response = {
+            'status': 'success',
+            'item_name': error.ITEM_NAME,
+            'index': error.ITEM_INDEX
+        }
+    } else {
+        response = {
+            'status': 'error',
+            'error_name': error.ERROR_TYPE,
+            'message': error.message,
+            'RETURNED_VALUE': error.RETURNED_VALUE
+        };
     }
-  }else{
-    response = {
-      'status': 'error',
-      'error_name': error.ERROR_TYPE,
-      'message': error.message,
-      'RETURNED_VALUE': error.RETURNED_VALUE
-  };
-  }
-    
+
     console.log(response);
 }

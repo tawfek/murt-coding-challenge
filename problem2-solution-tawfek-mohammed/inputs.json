@@ -1,0 +1,31 @@
+{
+  "fridge": {
+    "tomato": 2,
+    "onion": 2,
+    "apple": 3,
+    "banana": 5
+  },
+  "ingredients": [
+    {
+      "tomato": 1,
+      "onion": 2
+    },
+    {
+      "tomato": 3,
+      "onion": 2,
+      "apple": 3
+    },
+    {
+      "tomato": 2,
+      "onion": 2
+    },
+    {
+      "sugar": 1,
+      "milk": 2,
+      "banana": 2
+    },
+    {
+      "apple": 2
+    }
+  ]
+}
