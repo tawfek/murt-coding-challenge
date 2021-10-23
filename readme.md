@@ -18,10 +18,18 @@
 
 > each problem has it own instructions , you can find it inside the problem file
 
+
 ## Testing 
   i used **jest** for unit testing 
   you can run the test by typing :
   `npm run test` or `npm test` in the command line
   
+
+
+## run.sh 
+ if you don't have time to write command 
+ there is `run.sh` in **each problem folder**
+ it will **automatically** run the commands for you
+
 
 
