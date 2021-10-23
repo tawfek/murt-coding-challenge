@@ -1,7 +1,12 @@
 var fs = require('fs');
 
 /**
+ * Problem 1: Validate Recipe
+ * url : https://github.com/bloom-academy/coding-in-turkey-2021/tree/main/problem-1
+ * 
  * How to use 
+ * 
+ * note : this file only work from command line with arguments
  * options :
  * [-i][--ingredients] : select the ingredients , we have 5 ingredients , and we can list them (optional , default : 1)
  * [-f][--file] : select the file that contains the fridge data (optional , default : inputs.json)

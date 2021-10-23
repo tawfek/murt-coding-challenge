@@ -1,6 +1,8 @@
 let fs = require('fs')
 
 /**
+ * Problem 2: Validate Recipe with Quantity
+ * url : https://github.com/bloom-academy/coding-in-turkey-2021/tree/main/problem-2
  * 
  * How to use 
  * options :

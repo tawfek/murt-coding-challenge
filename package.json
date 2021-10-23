@@ -1,0 +1,25 @@
+{
+  "name": "murt-coding-challenge",
+  "version": "1.0.0",
+  "description": "codding challenge",
+  "main": "test/test.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tawfek/murt-coding-challenge.git"
+  },
+  "keywords": [
+    "coding"
+  ],
+  "author": "tawfek mohammed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tawfek/murt-coding-challenge/issues"
+  },
+  "homepage": "https://github.com/tawfek/murt-coding-challenge#readme",
+  "devDependencies": {
+    "jest": "^27.3.1"
+  }
+}

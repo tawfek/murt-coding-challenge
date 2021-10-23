@@ -1,6 +1,15 @@
 var fs = require('fs');
+
 /**
+ * Problem 0: Where Is My Food?
+ * 
+ * url : https://github.com/bloom-academy/coding-in-turkey-2021/tree/main/problem-0
+ * 
  * How to use :
+ * 
+ * note : this file only work from command line with arguments
+ * 
+ * 
  *  options :
  *  [-i] [--item] : the item name to search in the fridge (required)
  * [-f] [--file] : the file name to search in (optional , default inputs.json)
@@ -24,7 +33,7 @@ var fs = require('fs');
  * @returns {integer} Returns the index of item in the fridge
  * @tawfek
  */
-let whereIsMyFood = (fridge, item) => {
+ function whereIsMyFood(fridge, item) {
     var itemIndex = -1;
     var FridgeCap = fridge.length;
     while (FridgeCap--) {
@@ -146,3 +155,5 @@ try {
 
     console.log(response);
 }
+
+module.exports = whereIsMyFood
